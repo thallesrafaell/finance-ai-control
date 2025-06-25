@@ -3,9 +3,10 @@ import { db } from "@/lib/prisma";
 import { transactionColumns } from "./_columns";
 import TransactionMobileCard from "@/components/transactionMobileCard";
 import AddTransactionButton from "@/components/addTransactionButton";
+import { Transaction } from "@/generated/prisma";
 
 const TransactionPage = async () => {
-  const transactions = await db.transaction.findMany({});
+  const transactions: Transaction[] = await db.transaction.findMany({});
   return (
     <div className="container mx-auto max-w-[1400px] space-y-6 p-6">
       <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
@@ -14,11 +15,17 @@ const TransactionPage = async () => {
       </div>
       <div>
         <div className="hidden md:block">
-          <DataTable columns={transactionColumns} data={transactions} />
+          <DataTable
+            columns={transactionColumns}
+            data={JSON.parse(JSON.stringify(transactions))}
+          />
         </div>
         <div className="md:hidden">
-          {transactions.map((transaction) => (
-            <TransactionMobileCard key={transaction.id} {...transaction} />
+          {transactions.map((transaction: Transaction) => (
+            <TransactionMobileCard
+              key={transaction.id}
+              {...JSON.parse(JSON.stringify(transaction))}
+            />
           ))}
         </div>
       </div>
