@@ -10,7 +10,8 @@ import {
 } from "./ui/card";
 import TransactionTypeBadge from "./ui/typeBadge";
 import { Button } from "./ui/button";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
+import EditTransactionButton from "./editTransactionButton";
 
 const TransactionMobileCard = (transaction: Transaction) => {
   return (
@@ -43,10 +44,12 @@ const TransactionMobileCard = (transaction: Transaction) => {
         </CardDescription>
       </CardContent>
       <CardFooter className="absolute top-3 right-2 flex justify-end space-x-2">
-        <Button size={"icon"} variant="ghost">
-          <PencilIcon />
-        </Button>
-        <Button size={"icon"} variant="ghost">
+        <EditTransactionButton transaction={transaction} />
+        <Button
+          size={"icon"}
+          variant="ghost"
+          className="trasition-colors text-red-600 hover:text-red-600/50"
+        >
           <TrashIcon />
         </Button>
       </CardFooter>
