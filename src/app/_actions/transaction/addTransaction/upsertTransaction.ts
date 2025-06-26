@@ -7,7 +7,7 @@ import { addTransactionSchema } from "./schema";
 import { revalidatePath } from "next/cache";
 
 export const addTransaction = async (
-  data: Omit<Prisma.TransactionCreateInput, "userId">,
+  data: Omit<Prisma.TransactionCreateInput, "userId"> & { id: string },
 ) => {
   addTransactionSchema.parse(data);
   const { userId } = await auth();
@@ -16,16 +16,16 @@ export const addTransaction = async (
   }
 
   await db.transaction.upsert({
-    where: {
-      id: data.id,
-      userId,
-    },
     create: {
       ...data,
       userId,
     },
     update: {
       ...data,
+      userId,
+    },
+    where: {
+      id: data.id || "",
     },
   });
 
