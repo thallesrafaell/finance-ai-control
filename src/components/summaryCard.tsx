@@ -22,7 +22,7 @@ const SummaryCard = ({
   setShowValues,
 }: SummaryCardProps) => {
   return (
-    <Card>
+    <Card className={size === "sm" ? "bg-transparent" : ""}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           {icon}
