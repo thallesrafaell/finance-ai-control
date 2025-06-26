@@ -30,6 +30,8 @@ const TimeSelect = () => {
   };
   const serachParams = useSearchParams();
   const month = serachParams.get("month");
+  const currentMonth = new Date().getMonth() + 1;
+
   return (
     <Select
       onValueChange={handleMonthChange}
@@ -40,7 +42,15 @@ const TimeSelect = () => {
       </SelectTrigger>
       <SelectContent>
         {MONTHS_OPTIONS.map((month) => (
-          <SelectItem key={month.value} value={month.value}>
+          <SelectItem
+            key={month.value}
+            value={month.value}
+            defaultValue={
+              String(currentMonth).padStart(2, "0") === month.value
+                ? month.value
+                : undefined
+            }
+          >
             {month.label}
           </SelectItem>
         ))}

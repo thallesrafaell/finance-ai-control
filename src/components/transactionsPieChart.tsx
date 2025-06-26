@@ -1,9 +1,9 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
+import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react";
 import { Pie, PieChart } from "recharts";
 
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -11,26 +11,10 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { TransactionType } from "@/generated/prisma";
+import { TransactionPercentagePerType } from "@/app/_data/getDashboard/types";
+import PercentageItem from "./percetageItem";
 
 export const description = "A donut chart";
-
-const chartData = [
-  {
-    type: TransactionType.DEPOSIT,
-    amount: 5500,
-    fill: "oklch(72.3% 0.219 149.579)",
-  },
-  {
-    type: TransactionType.EXPENSE,
-    amount: 3200,
-    fill: "oklch(0.645 0.246 16.439)",
-  },
-  {
-    type: TransactionType.INCOME,
-    amount: 1800,
-    fill: "oklch(0.985 0 0)",
-  },
-];
 
 const chartConfig = {
   [TransactionType.DEPOSIT]: {
@@ -47,9 +31,39 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function TransactionsPieChart() {
+interface TransactionsPieChartProps {
+  depositTotal?: number;
+  investimentTotal?: number;
+  expenseTotal?: number;
+  typesPercentage?: TransactionPercentagePerType;
+}
+
+export function TransactionsPieChart({
+  depositTotal,
+  investimentTotal,
+  expenseTotal,
+  typesPercentage,
+}: TransactionsPieChartProps) {
+  const chartData = [
+    {
+      type: TransactionType.DEPOSIT,
+      amount: depositTotal || 0,
+      fill: chartConfig[TransactionType.DEPOSIT].color,
+    },
+    {
+      type: TransactionType.EXPENSE,
+      amount: expenseTotal || 0,
+      fill: chartConfig[TransactionType.EXPENSE].color,
+    },
+    {
+      type: TransactionType.INCOME,
+      amount: investimentTotal || 0,
+      fill: chartConfig[TransactionType.INCOME].color,
+    },
+  ];
+
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col bg-transparent">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
@@ -69,15 +83,24 @@ export function TransactionsPieChart() {
             />
           </PieChart>
         </ChartContainer>
+        <div className="space-y-2">
+          <PercentageItem
+            value={typesPercentage?.[TransactionType.DEPOSIT]}
+            title="Receitas"
+            icon={<TrendingUp size={16} className="text-primary h-4" />}
+          />
+          <PercentageItem
+            value={typesPercentage?.[TransactionType.INCOME]}
+            title="Investimentos"
+            icon={<PiggyBank size={16} className="text-whiteh-4" />}
+          />
+          <PercentageItem
+            value={typesPercentage?.[TransactionType.EXPENSE]}
+            title="Despesas"
+            icon={<TrendingDown size={16} className="text-destructive h-4" />}
+          />
+        </div>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
     </Card>
   );
 }
