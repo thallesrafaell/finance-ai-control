@@ -21,7 +21,7 @@ const SummaryCards = ({
   expenseTotal,
   balance,
 }: SummaryCardsProps) => {
-  const [showValues, setShowValues] = useState(false);
+  const [showValues, setShowValues] = useState(true);
 
   return (
     <div className="space-y-4">
