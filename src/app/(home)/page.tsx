@@ -6,6 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 import { isMatch } from "date-fns";
 import { redirect } from "next/navigation";
 import { getDashboard } from "../_data/getDashboard";
+import ExpensesPerCategory from "@/components/expensesPerCategory";
 
 interface HomeProps {
   searchParams: {
@@ -43,6 +44,9 @@ export default async function Home({ searchParams }: HomeProps) {
             <SummaryCards {...dashboardData} />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-[1fr_2fr]">
               <TransactionsPieChart {...dashboardData} />
+              <ExpensesPerCategory
+                expensesPerCategory={dashboardData.totalExpensePerCategory}
+              />
             </div>
           </div>
         </div>
