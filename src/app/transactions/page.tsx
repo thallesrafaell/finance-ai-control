@@ -14,7 +14,14 @@ const TransactionPage = async () => {
   if (!userId) {
     redirect("/auth");
   }
-  const transactions: Transaction[] = await db.transaction.findMany({});
+  const transactions: Transaction[] = await db.transaction.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   return (
     <>
       <NavBar />
