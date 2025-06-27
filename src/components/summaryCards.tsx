@@ -13,6 +13,7 @@ interface SummaryCardsProps {
   investimentTotal: number;
   expenseTotal: number;
   balance: number;
+  canUserAddTransaction: boolean;
 }
 
 const SummaryCards = ({
@@ -20,6 +21,7 @@ const SummaryCards = ({
   investimentTotal,
   expenseTotal,
   balance,
+  canUserAddTransaction = true,
 }: SummaryCardsProps) => {
   const [showValues, setShowValues] = useState(true);
 
@@ -36,6 +38,7 @@ const SummaryCards = ({
         size="lg"
         showValues={showValues}
         setShowValues={setShowValues}
+        canUserAddTransaction={canUserAddTransaction}
       />
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <SummaryCard

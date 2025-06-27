@@ -11,6 +11,7 @@ interface SummaryCardProps {
   size?: "sm" | "lg";
   showValues: boolean;
   setShowValues: (show: boolean) => void;
+  canUserAddTransaction?: boolean;
 }
 
 const SummaryCard = ({
@@ -20,6 +21,7 @@ const SummaryCard = ({
   size = "sm",
   showValues,
   setShowValues,
+  canUserAddTransaction,
 }: SummaryCardProps) => {
   return (
     <Card className={size === "sm" ? "bg-transparent" : ""}>
@@ -63,7 +65,11 @@ const SummaryCard = ({
             </button>
           )}
         </div>
-        {size === "lg" && <AddTransactionButton />}
+        {size === "lg" && (
+          <AddTransactionButton
+            userCanCreateTransaction={canUserAddTransaction}
+          />
+        )}
       </CardContent>
     </Card>
   );

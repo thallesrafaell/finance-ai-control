@@ -8,6 +8,7 @@ import NavBar from "@/components/navBar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { canUserAddTransaction } from "../_data/canUserAddTransaction";
 
 const TransactionPage = async () => {
   const { userId } = await auth();
@@ -23,13 +24,17 @@ const TransactionPage = async () => {
       createdAt: "desc",
     },
   });
+
+  const userCanCreateTransaction = await canUserAddTransaction();
   return (
     <>
       <NavBar />
       <div className="container mx-auto max-w-[1400px] space-y-6 p-6">
         <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
           <h1 className="text-2xl font-bold">Transações</h1>
-          <AddTransactionButton />
+          <AddTransactionButton
+            userCanCreateTransaction={userCanCreateTransaction}
+          />
         </div>
         <div>
           <div className="hidden md:block">

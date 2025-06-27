@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import getMonthCurrentTransactions from "../_data/getMonthCurrentTransactions";
 
 const SubscriptionPage = async () => {
   const { userId } = await auth();
@@ -16,6 +17,8 @@ const SubscriptionPage = async () => {
   const user = await (await clerkClient()).users.getUser(userId);
 
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
+  const getAllTransactions = await getMonthCurrentTransactions(userId);
+  const allTransactions = JSON.parse(JSON.stringify(getAllTransactions));
 
   return (
     <>
@@ -42,7 +45,7 @@ const SubscriptionPage = async () => {
             <CardContent className="space-y-6 py-8">
               <div className="flex items-center gap-2">
                 <CheckIcon className="h-5 w-5 text-green-500" />
-                <p>Apenas 10 transações por mês(7/10)</p>
+                <p>Apenas 10 transações por mês({allTransactions}/10)</p>
               </div>
               <div className="flex items-center gap-2">
                 <XIcon className="h-5 w-5 text-red-500" />
