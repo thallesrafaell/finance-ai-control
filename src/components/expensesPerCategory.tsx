@@ -9,7 +9,7 @@ interface TotalExpensePerCategoryProps {
 const ExpensesPerCategory = ({
   expensesPerCategory,
 }: TotalExpensePerCategoryProps) => {
-  return (
+  return expensesPerCategory.length > 0 ? (
     <ScrollArea className="max-h-[80vh] rounded-md border p-6">
       <CardHeader className="mb-4">
         <CardTitle className="text-xl font-semibold">
@@ -33,6 +33,12 @@ const ExpensesPerCategory = ({
         ))}
       </CardContent>
     </ScrollArea>
+  ) : (
+    <div className="flex h-full w-full items-center justify-center">
+      <p className="text-muted-foreground text-sm">
+        Não há despesas registradas por categoria.
+      </p>
+    </div>
   );
 };
 
