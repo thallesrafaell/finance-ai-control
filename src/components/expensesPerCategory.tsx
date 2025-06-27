@@ -1,5 +1,5 @@
 import { TotalExpensePerCategory } from "@/app/_data/getDashboard/types";
-import { CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { Progress } from "./ui/progress";
 import { TRANSACTION_CATEGORY_LABELS } from "@/constants/transaction";
@@ -34,11 +34,11 @@ const ExpensesPerCategory = ({
       </CardContent>
     </ScrollArea>
   ) : (
-    <div className="flex h-full w-full items-center justify-center">
+    <Card className="flex h-full w-full items-center justify-center border bg-transparent p-6">
       <p className="text-muted-foreground text-sm">
         Não há despesas registradas por categoria.
       </p>
-    </div>
+    </Card>
   );
 };
 
