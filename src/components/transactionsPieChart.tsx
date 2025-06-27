@@ -62,7 +62,7 @@ export function TransactionsPieChart({
     },
   ];
 
-  return (
+  return chartData.length > 0 ? (
     <Card className="flex flex-col bg-transparent">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -99,6 +99,14 @@ export function TransactionsPieChart({
             title="Despesas"
             icon={<TrendingDown size={16} className="text-destructive h-4" />}
           />
+        </div>
+      </CardContent>
+    </Card>
+  ) : (
+    <Card className="flex flex-col bg-transparent">
+      <CardContent className="flex-1 pb-0">
+        <div className="text-muted-foreground flex h-full w-full items-center justify-center">
+          <p className="text-sm">Seus dados financeiros estão vazios</p>
         </div>
       </CardContent>
     </Card>
