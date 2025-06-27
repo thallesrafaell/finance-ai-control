@@ -24,7 +24,7 @@ const LastTransaction = ({ transactions }: LastTransactionProps) => {
   };
 
   return (
-    <Card className="h-[81.2%] w-full bg-transparent">
+    <Card className="h-[66.3%] w-full bg-transparent">
       <CardHeader className="flex w-full items-center justify-between text-xl">
         <CardTitle className="font-bold">Últimas Transações</CardTitle>
         <Button variant={"outline"} className="rounded-full font-bold" asChild>
