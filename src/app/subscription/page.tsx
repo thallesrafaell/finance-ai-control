@@ -1,7 +1,8 @@
 import CompleteAcquirePlanButton from "@/components/completeAcquirePlanButton";
 import NavBar from "@/components/navBar";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 
@@ -12,6 +13,10 @@ const SubscriptionPage = async () => {
     redirect("/auth");
   }
 
+  const user = await (await clerkClient()).users.getUser(userId);
+
+  const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
+
   return (
     <>
       <NavBar />
@@ -19,7 +24,12 @@ const SubscriptionPage = async () => {
         <h1 className="text-2xl font-bold">Assinatura</h1>
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
           <Card className="w-[450px]">
-            <CardHeader className="border-b border-solid py-8">
+            <CardHeader className="relative border-b border-solid py-8">
+              {!hasPremiumPlan && (
+                <Badge className="absolute top-8 left-20 bg-green-600/40 text-base text-white">
+                  Ativo
+                </Badge>
+              )}
               <h2 className="text-center text-lg font-bold">Plano Basic</h2>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-4xl">R$</span>
@@ -41,8 +51,14 @@ const SubscriptionPage = async () => {
             </CardContent>
           </Card>
           <Card className="w-[450px]">
-            <CardHeader className="border-b border-solid py-8">
-              <h2 className="text-center text-lg font-bold">Plano Basic</h2>
+            <CardHeader className="relative border-b border-solid py-8">
+              {hasPremiumPlan && (
+                <Badge className="absolute top-8 left-20 bg-green-600/40 text-base text-white">
+                  Ativo
+                </Badge>
+              )}
+
+              <h2 className="text-center text-lg font-bold">Plano Premium</h2>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-4xl">R$</span>
                 <span className="text-6xl font-bold">19,99</span>
