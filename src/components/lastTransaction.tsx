@@ -24,14 +24,14 @@ const LastTransaction = ({ transactions }: LastTransactionProps) => {
   };
 
   return (
-    <Card className="h-[66.3%] w-full bg-transparent">
+    <Card className="md:min-h[75.3%] h-[75.3%] w-full bg-transparent">
       <CardHeader className="flex w-full items-center justify-between text-xl">
         <CardTitle className="font-bold">Últimas Transações</CardTitle>
         <Button variant={"outline"} className="rounded-full font-bold" asChild>
           <Link href="/transactions">Ver Todas</Link>
         </Button>
       </CardHeader>
-      <ScrollArea className="h-full rounded-md py-6">
+      <ScrollArea className="h-[95%] rounded-md py-6">
         <CardContent className="space-y-6">
           {transactions.map((transaction) => (
             <div
