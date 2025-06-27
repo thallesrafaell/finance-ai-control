@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -28,29 +28,22 @@ const TimeSelect = () => {
   const handleMonthChange = (value: string) => {
     push(`/?month=${value}`);
   };
-  const serachParams = useSearchParams();
-  const month = serachParams.get("month");
-  const currentMonth = new Date().getMonth() + 1;
 
   return (
     <Select
       onValueChange={handleMonthChange}
-      defaultValue={String(month).padStart(2, "0")}
+      defaultValue={
+        new Date().getMonth() + 1 < 10
+          ? `0${new Date().getMonth() + 1}`
+          : String(new Date().getMonth() + 1)
+      }
     >
       <SelectTrigger className="rounded-full">
         <SelectValue placeholder="Mês" />
       </SelectTrigger>
       <SelectContent>
         {MONTHS_OPTIONS.map((month) => (
-          <SelectItem
-            key={month.value}
-            value={month.value}
-            defaultValue={
-              String(currentMonth).padStart(2, "0") === month.value
-                ? month.value
-                : undefined
-            }
-          >
+          <SelectItem key={month.value} value={month.value}>
             {month.label}
           </SelectItem>
         ))}

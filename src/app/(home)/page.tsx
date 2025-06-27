@@ -26,8 +26,7 @@ export default async function Home({ searchParams }: HomeProps) {
 
   const monthInvalid = !month || !isMatch(String(month), "MM");
   if (monthInvalid) {
-    const currentMonth = Number(new Date().getMonth()) + 1;
-    redirect("/?month=" + String(currentMonth).padStart(2, "0"));
+    redirect("?month=" + new Date().getMonth() + 1);
   }
 
   const dashboardData = await getDashboard(month);
