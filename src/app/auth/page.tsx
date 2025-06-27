@@ -12,7 +12,7 @@ const AuthPage = async () => {
   }
 
   return (
-    <div className="grid h-full grid-cols-2">
+    <div className="grid min-h-[calc(100vh-2rem)] grid-cols-2">
       {/* Left Side: FORM */}
       <div className="mx-auto flex max-w-[550px] flex-col justify-center p-8">
         <Image src="/images/logo.svg" alt=" Logo" width={175} height={40} />
