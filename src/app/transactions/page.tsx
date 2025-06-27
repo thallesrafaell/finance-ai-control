@@ -7,6 +7,7 @@ import { Transaction } from "@/generated/prisma";
 import NavBar from "@/components/navBar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const TransactionPage = async () => {
   const { userId } = await auth();
@@ -32,10 +33,12 @@ const TransactionPage = async () => {
         </div>
         <div>
           <div className="hidden md:block">
-            <DataTable
-              columns={transactionColumns}
-              data={JSON.parse(JSON.stringify(transactions))}
-            />
+            <ScrollArea className="h-[70vh] rounded-md border">
+              <DataTable
+                columns={transactionColumns}
+                data={JSON.parse(JSON.stringify(transactions))}
+              />
+            </ScrollArea>
           </div>
           <div className="md:hidden">
             {transactions.map((transaction: Transaction) => (

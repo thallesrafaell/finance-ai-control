@@ -27,8 +27,10 @@ export default function RootLayout({
         }}
       >
         <body className={`${mulish.className} antialiased`}>
-          {children}
-          <Toaster position="top-right" richColors duration={2000} />
+          <div className="flex max-h-[calc(100vh-2rem)] w-full flex-col overflow-hidden">
+            {children}
+            <Toaster position="top-right" richColors duration={2000} />
+          </div>
         </body>
       </ClerkProvider>
     </html>
