@@ -20,7 +20,8 @@ export const createCheckout = async () => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card", "boleto"],
     mode: "subscription",
-    success_url: process.env.STRIPE_SUCCESS_URL || `http://localhost:3000/`,
+    success_url:
+      process.env.NEXT_PUBLIC_STRIPE_SUCCESS_URL || `http://localhost:3000/`,
     cancel_url:
       process.env.STRIPE_CANCEL_URL || `http://localhost:3000/subscription`,
     subscription_data: {
