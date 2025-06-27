@@ -35,6 +35,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import {
+  TRANSACTION_CATEGORY_OPTIONS,
   TRANSACTION_PAYMENT_METHOD_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
 } from "@/constants/transaction";
@@ -94,7 +95,7 @@ const UpsertTransactionDialog = ({
       await addTransaction({
         ...data,
         amount: formatedAmount,
-        id: transactionId,
+        id: transactionId!,
       });
       form.reset();
       setIsOpen(false);
@@ -167,6 +168,33 @@ const UpsertTransactionDialog = ({
                       disabled={field.disabled}
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem className="w-full">
+                  <FormLabel>Categoria</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Selecione a categoria" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {TRANSACTION_CATEGORY_OPTIONS.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
