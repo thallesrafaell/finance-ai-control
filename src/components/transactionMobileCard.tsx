@@ -9,9 +9,8 @@ import {
   CardTitle,
 } from "./ui/card";
 import TransactionTypeBadge from "./ui/typeBadge";
-import { Button } from "./ui/button";
-import { TrashIcon } from "lucide-react";
 import EditTransactionButton from "./editTransactionButton";
+import { DeleteTransactionButton } from "./deleteTransactionButton";
 
 const TransactionMobileCard = (transaction: Transaction) => {
   return (
@@ -45,13 +44,7 @@ const TransactionMobileCard = (transaction: Transaction) => {
       </CardContent>
       <CardFooter className="absolute top-3 right-2 flex justify-end space-x-2">
         <EditTransactionButton transaction={transaction} />
-        <Button
-          size={"icon"}
-          variant="ghost"
-          className="trasition-colors text-red-600 hover:text-red-600/50"
-        >
-          <TrashIcon />
-        </Button>
+        <DeleteTransactionButton transactionId={transaction.id} />
       </CardFooter>
     </Card>
   );
