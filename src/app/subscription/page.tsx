@@ -26,10 +26,10 @@ const SubscriptionPage = async () => {
       <div className="container mx-auto max-w-[1400px] space-y-6 p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
         <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
-          <Card className="w-[450px]">
+          <Card className="w-full md:w-[450px]">
             <CardHeader className="relative border-b border-solid py-8">
               {!hasPremiumPlan && (
-                <Badge className="absolute top-8 left-20 bg-green-600/40 text-base text-white">
+                <Badge className="absolute top-8 left-12 bg-green-600/40 text-base text-white md:left-20">
                   Ativo
                 </Badge>
               )}
@@ -53,10 +53,10 @@ const SubscriptionPage = async () => {
               </div>
             </CardContent>
           </Card>
-          <Card className="w-[450px]">
+          <Card className="w-full md:w-[450px]">
             <CardHeader className="relative border-b border-solid py-8">
               {hasPremiumPlan && (
-                <Badge className="absolute top-8 left-20 bg-green-600/40 text-base text-white">
+                <Badge className="absolute top-8 left-12 bg-green-600/40 text-base text-white md:left-20">
                   Ativo
                 </Badge>
               )}
