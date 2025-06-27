@@ -7,6 +7,7 @@ import { isMatch } from "date-fns";
 import { redirect } from "next/navigation";
 import { getDashboard } from "../_data/getDashboard";
 import ExpensesPerCategory from "@/components/expensesPerCategory";
+import LastTransaction from "@/components/lastTransaction";
 
 interface HomeProps {
   searchParams: {
@@ -35,7 +36,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <>
       <NavBar />
       <div className="container mx-auto max-w-[1400px] space-y-6 p-6">
-        <div className="flex flex-col items-start justify-between space-y-4 md:flex-row md:items-center md:space-y-0">
+        <div className="flex max-h-[60vh] flex-col items-start justify-between space-y-4 md:flex-row md:items-center md:space-y-0">
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <TimeSelect />
         </div>
@@ -49,6 +50,7 @@ export default async function Home({ searchParams }: HomeProps) {
               />
             </div>
           </div>
+          <LastTransaction transactions={dashboardData.lastTransactions} />
         </div>
       </div>
     </>
