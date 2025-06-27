@@ -12,6 +12,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.23.0",
     "@clerk/themes": "^2.2.51",
+    "@google/genai": "^1.7.0",
     "@hookform/resolvers": "^5.1.1",
     "@ionic/react": "^8.6.2",
     "@ionic/react-router": "^8.6.2",
@@ -29,6 +30,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "git-commit-msg-linter": "^5.0.8",
     "husky": "^9.1.7",
     "ionicons": "^8.0.9",
@@ -40,6 +42,7 @@
     "react-day-picker": "^9.7.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.58.1",
+    "react-markdown": "^10.1.0",
     "react-number-format": "^5.4.4",
     "recharts": "^3.0.0",
     "sonner": "^2.0.5",
@@ -50,6 +53,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20.19.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -9,6 +9,7 @@ import { getDashboard } from "../_data/getDashboard";
 import ExpensesPerCategory from "@/components/expensesPerCategory";
 import LastTransaction from "@/components/lastTransaction";
 import { canUserAddTransaction } from "../_data/canUserAddTransaction";
+import Aireports from "@/components/aiReports";
 
 interface HomeProps {
   searchParams: {
@@ -39,7 +40,10 @@ export default async function Home({ searchParams }: HomeProps) {
       <div className="container mx-auto max-w-[1400px] space-y-6 overflow-hidden p-6">
         <div className="flex max-h-[60vh] flex-col items-start justify-between space-y-4 md:flex-row md:items-center md:space-y-0">
           <h1 className="text-2xl font-bold">Dashboard</h1>
-          <TimeSelect />
+          <div className="item-center flex gap-3">
+            <TimeSelect />
+            <Aireports month={month} isPremiumPlan={userCanAddTransaction} />
+          </div>
         </div>
         <div className="grid max-h-[79vh] grid-cols-1 gap-4 overflow-hidden md:grid-cols-[2fr_1fr] md:items-start">
           <div className="flex flex-col space-y-4 overflow-hidden">
