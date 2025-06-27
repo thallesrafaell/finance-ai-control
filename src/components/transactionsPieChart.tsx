@@ -63,13 +63,10 @@ export function TransactionsPieChart({
   ];
 
   const hasData =
-    depositTotal !== undefined ||
-    investimentTotal !== undefined ||
-    expenseTotal !== undefined ||
-    typesPercentage !== undefined ||
-    Number.isNaN(depositTotal) ||
-    Number.isNaN(investimentTotal) ||
-    Number.isNaN(expenseTotal);
+    (depositTotal !== undefined && !Number.isNaN(depositTotal)) ||
+    (investimentTotal !== undefined && !Number.isNaN(investimentTotal)) ||
+    (expenseTotal !== undefined && !Number.isNaN(expenseTotal)) ||
+    typesPercentage !== undefined;
 
   return hasData ? (
     <Card className="flex flex-col bg-transparent">
