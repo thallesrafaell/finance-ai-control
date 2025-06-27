@@ -20,8 +20,8 @@ export const createCheckout = async () => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card", "boleto"],
     mode: "subscription",
-    success_url: `https://finance-ai-control.vercel.app/`,
-    cancel_url: `https://finance-ai-control.vercel.app/subscription`,
+    success_url: `https://financeai.codeverse42.com.br/auth`,
+    cancel_url: `https://financeai.codeverse42.com.br/subscription`,
     subscription_data: {
       metadata: {
         clerk_user_id: userId,
