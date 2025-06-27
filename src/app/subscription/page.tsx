@@ -1,5 +1,8 @@
+import CompleteAcquirePlanButton from "@/components/completeAcquirePlanButton";
 import NavBar from "@/components/navBar";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { auth } from "@clerk/nextjs/server";
+import { CheckIcon, XIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 
 const SubscriptionPage = async () => {
@@ -8,7 +11,63 @@ const SubscriptionPage = async () => {
   if (!userId) {
     redirect("/auth");
   }
-  return <NavBar />;
+
+  return (
+    <>
+      <NavBar />
+      <div className="container mx-auto max-w-[1400px] space-y-6 p-6">
+        <h1 className="text-2xl font-bold">Assinatura</h1>
+        <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
+          <Card className="w-[450px]">
+            <CardHeader className="border-b border-solid py-8">
+              <h2 className="text-center text-lg font-bold">Plano Basic</h2>
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-4xl">R$</span>
+                <span className="text-6xl font-bold">0,00</span>
+                <span className="text-muted-foreground text-2xlfont-medium">
+                  /mês
+                </span>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6 py-8">
+              <div className="flex items-center gap-2">
+                <CheckIcon className="h-5 w-5 text-green-500" />
+                <p>Apenas 10 transações por mês(7/10)</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <XIcon className="h-5 w-5 text-red-500" />
+                <p>Relátorio de IA</p>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="w-[450px]">
+            <CardHeader className="border-b border-solid py-8">
+              <h2 className="text-center text-lg font-bold">Plano Basic</h2>
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-4xl">R$</span>
+                <span className="text-6xl font-bold">19,99</span>
+                <span className="text-muted-foreground text-2xlfont-medium">
+                  /mês
+                </span>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-6 py-8">
+              <div className="flex items-center gap-2">
+                <CheckIcon className="h-5 w-5 text-green-500" />
+                <p>Transações ilimitadas</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="h-5 w-5 text-green-500" />
+
+                <p>Relátorio de IA</p>
+              </div>
+              <CompleteAcquirePlanButton />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default SubscriptionPage;
