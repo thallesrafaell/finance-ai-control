@@ -62,7 +62,16 @@ export function TransactionsPieChart({
     },
   ];
 
-  return chartData.length > 0 ? (
+  const hasData =
+    depositTotal !== undefined ||
+    investimentTotal !== undefined ||
+    expenseTotal !== undefined ||
+    typesPercentage !== undefined ||
+    Number.isNaN(depositTotal) ||
+    Number.isNaN(investimentTotal) ||
+    Number.isNaN(expenseTotal);
+
+  return hasData ? (
     <Card className="flex flex-col bg-transparent">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
