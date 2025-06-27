@@ -13,6 +13,7 @@ export const getDashboard = async (month: string | number) => {
   }
 
   const where = {
+    userId,
     date: {
       gte: new Date(new Date().getFullYear(), Number(month) - 1, 1),
       lt: new Date(new Date().getFullYear(), Number(month), 1),
